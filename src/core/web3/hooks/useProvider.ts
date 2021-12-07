@@ -11,6 +11,8 @@ export const useProvider = (): ProviderState => {
   useEffect(() => {
     if (chainMeta) {
       setProvider(window.ethersWeb3Provider);
+    } else {
+      setProvider(null);
     }
   }, [chainMeta]);
 
