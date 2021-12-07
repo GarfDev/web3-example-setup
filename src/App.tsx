@@ -3,16 +3,16 @@ import { useDispatch } from "react-redux";
 
 import { WALLET } from "./core/web3/constants";
 import { connectWallet, disconnectWallet } from "./core/web3/actions";
+import { useProvider } from "./core/web3/hooks/useProvider";
 
 import logo from "./logo.svg";
 
 import "./App.css";
-import { ethers } from "ethers";
 
 function App() {
   const dispatch = useDispatch();
 
-  const provider = window.ethersWeb3Provider as ethers.providers.Web3Provider;
+  const provider = useProvider();
 
   const connect = () => {
     dispatch(connectWallet({ wallet: WALLET.METAMASK }));
