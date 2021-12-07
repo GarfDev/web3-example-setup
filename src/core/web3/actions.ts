@@ -6,5 +6,7 @@ import { ChainData } from "./types";
 export const connectWallet = ({ wallet }: { wallet: WALLET }) =>
   action(ActionTypes.CONNECT_WALLET, { wallet });
 
-export const updateChainMeta = (chainMeta: ChainData) =>
+export const disconnectWallet = () => action(ActionTypes.DISCONNECT_WALLET);
+
+export const updateChainMeta = (chainMeta?: ChainData) =>
   action(ActionTypes.UPDATE_CHAIN_META, { chainMeta });

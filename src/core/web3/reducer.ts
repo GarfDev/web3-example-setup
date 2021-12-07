@@ -13,7 +13,7 @@ export const web3Reducer = (
     case ActionTypes.UPDATE_CHAIN_META: {
       return {
         ...state,
-        chainMeta: action.payload.chainMeta,
+        chainMeta: action.payload.chainMeta || null,
       };
     }
     default:

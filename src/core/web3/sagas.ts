@@ -29,6 +29,10 @@ function* connectWallet({ payload }: ReturnType<typeof actions.connectWallet>) {
   }
 }
 
+export function* disconnectWallet() {
+  yield web3.disconnectWallet();
+}
+
 export function* restoreWallet(): Generator<Promise<boolean> | CallEffect<true>, void> {
   for (let i = 1; i < 4; i++) {
     if (yield web3.reconnectWallet()) return;
@@ -39,4 +43,5 @@ export function* restoreWallet(): Generator<Promise<boolean> | CallEffect<true>,
 
 export function* web3Saga() {
   yield takeLatest(ActionTypes.CONNECT_WALLET, connectWallet);
+  yield takeLatest(ActionTypes.DISCONNECT_WALLET, disconnectWallet);
 }

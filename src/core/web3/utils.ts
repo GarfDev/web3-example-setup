@@ -87,3 +87,18 @@ export const reconnectWallet = async (): Promise<boolean> => {
 
   return false;
 };
+
+export const disconnectWallet = (): boolean => {
+  try {
+    localStorage.removeItem(WALLET_STORAGE_KEY);
+    window.ethersWeb3Provider = null;
+    store.dispatch(updateChainMeta())
+
+    return true;
+  } catch (err) {
+    console.error(err);
+
+    return false;
+  }
+};
+
