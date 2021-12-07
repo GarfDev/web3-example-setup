@@ -1,10 +1,9 @@
 import { ActionType } from "typesafe-actions";
 
-import { WALLET } from "./constants";
 import * as actions from "./actions";
 
 export interface Web3State {
-  wallet: WALLET | null;
+  chainMeta: ChainData | null;
 }
 
 export type Web3Actions = ActionType<typeof actions>;
@@ -20,7 +19,8 @@ export interface ChainData {
   name: string;
   chain: string;
   network: string;
-  chainId: string;
-  networkId: string;
+  chainId: number;
+  networkId: number;
   rpcUrl: string;
+  nativeCurrency: ChainCurrency;
 }

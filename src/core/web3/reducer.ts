@@ -1,14 +1,21 @@
+import { ActionTypes } from "./action.types";
 import { Web3Actions, Web3State } from "./types";
 
 const initialState: Web3State = {
-  wallet: null,
+  chainMeta: null,
 };
 
 export const web3Reducer = (
   state = initialState,
-  actions: Web3Actions
+  action: Web3Actions
 ): Web3State => {
-  switch (actions.type) {
+  switch (action.type) {
+    case ActionTypes.UPDATE_CHAIN_META: {
+      return {
+        ...state,
+        chainMeta: action.payload.chainMeta,
+      };
+    }
     default:
       return state;
   }

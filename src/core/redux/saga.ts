@@ -1,7 +1,7 @@
-import { fork } from "@redux-saga/core/effects";
+import { all, fork } from "@redux-saga/core/effects";
 
-import { web3Saga } from "../web3/sagas";
+import { restoreWallet, web3Saga } from "../web3/sagas";
 
 export function* rootSaga() {
-  yield fork(web3Saga);
+  yield all([fork(web3Saga), fork(restoreWallet)]);
 }

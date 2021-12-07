@@ -1,8 +1,9 @@
 import { ethers } from "ethers";
-import { call, takeLatest } from "redux-saga/effects";
+import { call, CallEffect, delay, put, takeLatest } from "redux-saga/effects";
 import { ActionTypes } from "./action.types";
 
 import * as actions from "./actions";
+import { WALLET_STORAGE_KEY } from "./constants";
 import * as web3 from "./utils";
 
 function* connectWallet({ payload }: ReturnType<typeof actions.connectWallet>) {
@@ -15,8 +16,24 @@ function* connectWallet({ payload }: ReturnType<typeof actions.connectWallet>) {
     yield provider.ready;
 
     window.ethersWeb3Provider = provider;
+    const chainMeta = web3.getChainMeta(provider.network.chainId);
+    if (!chainMeta) {
+      yield call(web3.requestChangeChain);
+      return false;
+    }
+
+    yield put(actions.updateChainMeta(chainMeta!));
+    localStorage.setItem(WALLET_STORAGE_KEY, payload.wallet);
   } catch (e) {
     console.error(e);
+  }
+}
+
+export function* restoreWallet(): Generator<Promise<boolean> | CallEffect<true>, void> {
+  for (let i = 1; i < 4; i++) {
+    if (yield web3.reconnectWallet()) return;
+
+    yield delay(i * 1000);
   }
 }
 
