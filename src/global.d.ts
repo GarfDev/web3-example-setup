@@ -1,3 +1,4 @@
+
 interface EthereumProvider extends EventEmitter {
   isMetaMask?: boolean;
   selectedAddress?: string;
@@ -11,4 +12,5 @@ interface EthereumProvider extends EventEmitter {
 }
 interface Window {
     ethereum: EthereumProvider;
+    ethersWeb3Provider?: ethers.providers.Web3Provider;
   }

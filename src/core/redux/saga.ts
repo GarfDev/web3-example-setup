@@ -1,2 +1,7 @@
+import { fork } from "@redux-saga/core/effects";
 
-export function* rootSaga() {}
+import { web3Saga } from "../utils/web3/sagas";
+
+export function* rootSaga() {
+  yield fork(web3Saga);
+}
