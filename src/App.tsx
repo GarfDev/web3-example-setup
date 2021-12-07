@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { WALLET } from "./core/utils/web3/constants";
-import { connectWallet } from "./core/utils/web3/actions";
+import { WALLET } from "./core/web3/constants";
+import { connectWallet } from "./core/web3/actions";
 
 import logo from "./logo.svg";
 
